@@ -191,8 +191,8 @@ function randomColor()
 	return rgb;
 }
   </script>
-	<button onclick="savePage()">Save Page</button>
-<button onclick="loadPage()">Load Saved Page</button>
+<button onclick="savePage()">Save Page</button>
+<button onclick="sharePage()">Share Saved Page</button>
 
 <script>
   function savePage() {
@@ -201,18 +201,20 @@ function randomColor()
     alert("Page saved successfully!");
   }
 
-  function loadPage() {
+  function sharePage() {
     var savedPage = localStorage.getItem('savedPage');
     if (savedPage) {
-      document.open();
-      document.write(savedPage);
-      document.close();
-      alert("Saved page loaded!");
+      var blob = new Blob([savedPage], { type: 'text/html' });
+      var url = URL.createObjectURL(blob);
+      var shareText = encodeURIComponent("Check out this Holi wishing page edited by " + document.getElementById('user-name').textContent);
+      var shareURL = 'mailto:?subject=Edited Holi Wishing Page&body=' + shareText + '%0D%0A' + url;
+      window.open(shareURL);
     } else {
       alert("No saved page found.");
     }
   }
 </script>
+
 
   <footer class="footer">
     <p>&copy; 2024 Tushar Kaushik. All rights reserved.</p>
