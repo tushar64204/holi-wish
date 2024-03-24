@@ -194,6 +194,7 @@ function randomColor()
 <button onclick="savePage()">Save Page</button>
 <button onclick="takeScreenshot()">Take Screenshot</button>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 <script>
   function savePage() {
     var pageContent = document.documentElement.outerHTML;
@@ -202,7 +203,7 @@ function randomColor()
   }
 
   function takeScreenshot() {
-    html2canvas(document.body).then(function(canvas) {
+    html2canvas(document.body, { allowTaint: true }).then(function(canvas) {
       // Convert canvas to image
       var screenshotImage = canvas.toDataURL("image/png");
 
@@ -212,9 +213,6 @@ function randomColor()
     });
   }
 </script>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 
   <footer class="footer">
     <p>&copy; 2024 Tushar Kaushik. All rights reserved.</p>
