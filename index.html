@@ -190,11 +190,9 @@ function randomColor()
 	var rgb = "rgb("+r+", "+g+", "+b+")";
 	return rgb;
 }
-  </script>
-<button onclick="savePage()">Save Page</button>
+  </script><button onclick="savePage()">Save Page</button>
 <button onclick="takeScreenshot()">Take Screenshot</button>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 <script>
   function savePage() {
     var pageContent = document.documentElement.outerHTML;
@@ -203,16 +201,11 @@ function randomColor()
   }
 
   function takeScreenshot() {
-    html2canvas(document.body, { allowTaint: true }).then(function(canvas) {
-      // Convert canvas to image
-      var screenshotImage = canvas.toDataURL("image/png");
-
-      // Open the image in a new tab for the user to download or save
-      var newTab = window.open();
-      newTab.document.body.innerHTML = '<img src="' + screenshotImage + '">';
-    });
+    // Open print dialog
+    window.print();
   }
 </script>
+
 
   <footer class="footer">
     <p>&copy; 2024 Tushar Kaushik. All rights reserved.</p>
