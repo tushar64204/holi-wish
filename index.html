@@ -191,11 +191,8 @@ function randomColor()
 	return rgb;
 }
   </script>
-
 <button onclick="savePage()">Save Page</button>
-<button onclick="sharePage()">Share Saved Page</button>
-<button onclick="openSavedPage()">Open Saved Page</button>
-<button onclick="copyPageLink()">Copy Saved Page Link</button>
+<button onclick="takeScreenshot()">Take Screenshot</button>
 
 <script>
   function savePage() {
@@ -204,60 +201,20 @@ function randomColor()
     alert("Page saved successfully!");
   }
 
-  function sharePage() {
-    var savedPage = localStorage.getItem('savedPage');
-    if (savedPage) {
-      var blob = new Blob([savedPage], { type: 'text/html' });
-      var url = URL.createObjectURL(blob);
-      var shareText = encodeURIComponent("Check out this Holi wishing page edited by " + document.getElementById('user-name').textContent);
-      var shareURL = 'mailto:?subject=Edited Holi Wishing Page&body=' + shareText + '%0D%0A' + url;
-      
-      // Display the shareable link to the user
-      var shareLink = document.createElement('textarea');
-      shareLink.value = shareURL;
-      document.body.appendChild(shareLink);
-      shareLink.select();
-      document.execCommand('copy');
-      document.body.removeChild(shareLink);
-      
-      alert("Shareable link copied to clipboard!");
-    } else {
-      alert("No saved page found.");
-    }
-  }
+  function takeScreenshot() {
+    html2canvas(document.body).then(function(canvas) {
+      // Convert canvas to image
+      var screenshotImage = canvas.toDataURL("image/png");
 
-  function openSavedPage() {
-    var savedPage = localStorage.getItem('savedPage');
-    if (savedPage) {
-      var blob = new Blob([savedPage], { type: 'text/html' });
-      var url = URL.createObjectURL(blob);
-      window.open(url, '_blank');
-    } else {
-      alert("No saved page found.");
-    }
-  }
-
-  function copyPageLink() {
-    var savedPage = localStorage.getItem('savedPage');
-    if (savedPage) {
-      var blob = new Blob([savedPage], { type: 'text/html' });
-      var url = URL.createObjectURL(blob);
-      
-      // Copy the link to the clipboard
-      var copyLink = document.createElement('textarea');
-      copyLink.value = url;
-      document.body.appendChild(copyLink);
-      copyLink.select();
-      document.execCommand('copy');
-      document.body.removeChild(copyLink);
-      
-      alert("Saved page link copied to clipboard!");
-    } else {
-      alert("No saved page found.");
-    }
+      // Open the image in a new tab for the user to download or save
+      var newTab = window.open();
+      newTab.document.body.innerHTML = '<img src="' + screenshotImage + '">';
+    });
   }
 </script>
 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 
   <footer class="footer">
     <p>&copy; 2024 Tushar Kaushik. All rights reserved.</p>
