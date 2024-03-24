@@ -191,6 +191,29 @@ function randomColor()
 	return rgb;
 }
   </script>
+	<button onclick="savePage()">Save Page</button>
+<button onclick="loadPage()">Load Saved Page</button>
+
+<script>
+  function savePage() {
+    var pageContent = document.documentElement.outerHTML;
+    localStorage.setItem('savedPage', pageContent);
+    alert("Page saved successfully!");
+  }
+
+  function loadPage() {
+    var savedPage = localStorage.getItem('savedPage');
+    if (savedPage) {
+      document.open();
+      document.write(savedPage);
+      document.close();
+      alert("Saved page loaded!");
+    } else {
+      alert("No saved page found.");
+    }
+  }
+</script>
+
   <footer class="footer">
     <p>&copy; 2024 Tushar Kaushik. All rights reserved.</p>
   </footer>
