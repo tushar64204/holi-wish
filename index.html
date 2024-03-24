@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Holi Wishing Poster</title>
+  <link  rel="stylesheet" href="/assets/styles.css"/>
+  <style>  .footer {
+    background-color: #333; /* Background color for the footer */
+    color: #fff; /* Text color */
+    padding: 20px; /* Padding around content inside the footer */
+    text-align: center; /* Align text to the center */
+  }
+  
+  .footer p {
+    margin: 0; /* Remove default margin for paragraphs */
+  }
+  
+  .footer a {
+    color: #fff; /* Text color for links */
+    text-decoration: none; /* Remove underline from links */
+  }
+  
+  .footer a:hover {
+    text-decoration: underline; /* Add underline on hover for links */
+  }</style>
+  
+</head>
+<body>
+  <div class="container">
+    <div class="poster">
+        <a href="./holika_prahlad.html" target="_blank">Holi kathay</a>
+        
+      <h1>Happy Holi!</h1>
+      <div class="image-container">
+        <img src="https://th.bing.com/th?id=OIP._ZKi6sN1OuCOn5A9ff03gwHaJR&w=223&h=279&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2" alt="User Photo" id="user-photo">
+      </div>
+      
+      <div class="quote-container">
+        <p id="wish-quote">Your personalized wish quote will appear here</p>
+      </div>
+    </div>
+    
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box">
+      <h1 style="font-size: 20">
+        <div class="name-container">
+          <p id="user-name">Krishna</p>
+        </div>
+      </h1>
+    </div>
+    <br><br>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <br><br>
+
+    <button onclick="editDetails()">Edit Details</button>
+    <a href="#" onclick="generateWish(); return false;" id="generate-btn" style="display: none;">Generate Wish</a>
+  </div>
+
+  <script>
+    function editDetails() {
+      var userName = prompt("Enter your name (Sender's name):");
+      
+      if (userName !== null) {
+        document.getElementById('user-name').textContent = userName;
+        document.getElementById('generate-btn').style.display = 'block';
+      }
+    }
+
+    function generateWish() {
+      var userName = document.getElementById('user-name').textContent || "Krishna";
+      var receiverName = prompt("Enter recipient's name:") || "friend";
+      var userPhoto = document.getElementById('user-photo').src || "https://th.bing.com/th?id=OIP._ZKi6sN1OuCOn5A9ff03gwHaJR&w=223&h=279&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2";
+      var defaultWish = `Wishing ${receiverName} a joyful Holi! May the colors of this festival fill your life with happiness and prosperity. With warm regards from ${userName}.`;
+      
+      var customQuote = prompt("Enter your personalized wish quote:") || defaultWish;
+      document.getElementById('wish-quote').textContent = customQuote;
+    }
+    var elements = document.getElementsByTagName("div");
+window.setInterval(function(){
+  setUp();
+}, 300);
+for(var i = 0; i<elements.length; i++)
+	{
+		elements[i].addEventListener("click", function(){
+		setUp();
+		});
+	}
+
+function setUp(){
+
+for(var i = 0, length = elements.length; i < length; i++) {
+       if( elements[i].textContent == ''){
+          elements[i].style.backgroundColor = randomColor();
+       } 
+    }
+}
+function randomColor() 
+{
+	var r, g,b;
+	r = Math.floor(Math.random() * 256);
+	g = Math.floor(Math.random() * 256);
+	b = Math.floor(Math.random() * 256);
+	var rgb = "rgb("+r+", "+g+", "+b+")";
+	return rgb;
+}
+  </script>
+  <footer class="footer">
+    <p>&copy; 2024 Tushar Kaushik. All rights reserved.</p>
+  </footer>
+</body>
+</html>
