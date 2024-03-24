@@ -194,6 +194,8 @@ function randomColor()
 
 <button onclick="savePage()">Save Page</button>
 <button onclick="sharePage()">Share Saved Page</button>
+<button onclick="openSavedPage()">Open Saved Page</button>
+<button onclick="copyPageLink()">Copy Saved Page Link</button>
 
 <script>
   function savePage() {
@@ -223,7 +225,39 @@ function randomColor()
       alert("No saved page found.");
     }
   }
+
+  function openSavedPage() {
+    var savedPage = localStorage.getItem('savedPage');
+    if (savedPage) {
+      var blob = new Blob([savedPage], { type: 'text/html' });
+      var url = URL.createObjectURL(blob);
+      window.open(url, '_blank');
+    } else {
+      alert("No saved page found.");
+    }
+  }
+
+  function copyPageLink() {
+    var savedPage = localStorage.getItem('savedPage');
+    if (savedPage) {
+      var blob = new Blob([savedPage], { type: 'text/html' });
+      var url = URL.createObjectURL(blob);
+      
+      // Copy the link to the clipboard
+      var copyLink = document.createElement('textarea');
+      copyLink.value = url;
+      document.body.appendChild(copyLink);
+      copyLink.select();
+      document.execCommand('copy');
+      document.body.removeChild(copyLink);
+      
+      alert("Saved page link copied to clipboard!");
+    } else {
+      alert("No saved page found.");
+    }
+  }
 </script>
+
 
   <footer class="footer">
     <p>&copy; 2024 Tushar Kaushik. All rights reserved.</p>
